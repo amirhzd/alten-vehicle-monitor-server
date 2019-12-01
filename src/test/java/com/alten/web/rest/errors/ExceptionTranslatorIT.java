@@ -1,6 +1,6 @@
 package com.alten.web.rest.errors;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests {@link ExceptionTranslator} controller advice.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 public class ExceptionTranslatorIT {
 
     @Autowired

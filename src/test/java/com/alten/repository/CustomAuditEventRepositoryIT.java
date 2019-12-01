@@ -1,6 +1,6 @@
 package com.alten.repository;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.config.Constants;
 import com.alten.config.audit.AuditEventConverter;
 import com.alten.domain.PersistentAuditEvent;
@@ -27,7 +27,7 @@ import static com.alten.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_
 /**
  * Integration tests for {@link CustomAuditEventRepository}.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIT {
 

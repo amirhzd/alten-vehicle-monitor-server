@@ -5,7 +5,8 @@ services:
     # volumes:
     #     - ~/volumes/jhipster/altenvehiclemonitorserver/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=altenvehiclemonitorserver
-      - POSTGRES_PASSWORD=
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=704351293
+      - POSTGRES_DB=altenvehiclemonitorserver
     ports:
       - 5432:5432

@@ -1,6 +1,6 @@
 package com.alten.service;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.config.Constants;
 import com.alten.domain.User;
 import com.alten.repository.UserRepository;
@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 /**
  * Integration tests for {@link UserService}.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 @Transactional
 public class UserServiceIT {
 

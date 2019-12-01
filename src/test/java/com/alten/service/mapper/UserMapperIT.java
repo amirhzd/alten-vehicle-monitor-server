@@ -1,7 +1,7 @@
 package com.alten.service.mapper;
 
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.domain.User;
 import com.alten.service.dto.UserDTO;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link UserMapper}.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 public class UserMapperIT {
 
     private static final String DEFAULT_LOGIN = "johndoe";

@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,14 +22,15 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
+@EnableSwagger2
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
-public class AltenvehiclemonitorserverApp implements InitializingBean {
+public class AltenVehicleMonitorServerApp implements InitializingBean {
 
-    private static final Logger log = LoggerFactory.getLogger(AltenvehiclemonitorserverApp.class);
+    private static final Logger log = LoggerFactory.getLogger(AltenVehicleMonitorServerApp.class);
 
     private final Environment env;
 
-    public AltenvehiclemonitorserverApp(Environment env) {
+    public AltenVehicleMonitorServerApp(Environment env) {
         this.env = env;
     }
 
@@ -58,7 +60,7 @@ public class AltenvehiclemonitorserverApp implements InitializingBean {
      * @param args the command line arguments.
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(AltenvehiclemonitorserverApp.class);
+        SpringApplication app = new SpringApplication(AltenVehicleMonitorServerApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);

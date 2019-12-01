@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  altenvehiclemonitorserver-rabbit:
+    build:
+      dockerfile: rabbitmq-image-mqtt-enabled
+      context: .
+    container_name: altenvehiclemonitorserver-rabbit
+    hostname: altenvehiclemonitorserver-rabbit
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=704351293
+    ports:
+      - "15672:15672"
+      - "5671:5671"
+      - "5672:5672"
+      - "1883:1883"

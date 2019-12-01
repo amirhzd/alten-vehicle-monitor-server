@@ -1,6 +1,6 @@
 package com.alten.web.rest;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.config.audit.AuditEventConverter;
 import com.alten.domain.PersistentAuditEvent;
 import com.alten.repository.PersistenceAuditEventRepository;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link AuditResource} REST controller.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 @Transactional
 public class AuditResourceIT {
 

@@ -1,0 +1,35 @@
+{
+    "name": "CustomerVehicleStatus",
+    "fields": [
+        {
+            "fieldName": "timestamp",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "VehicleStatus",
+            "fieldValues": "CONNECTED,NOT_CONNECTED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customerVehicle",
+            "otherEntityRelationshipName": "customerVehicleStatus",
+            "relationshipName": "customerVehicle",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191127001826",
+    "entityTableName": "customer_vehicle_status",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

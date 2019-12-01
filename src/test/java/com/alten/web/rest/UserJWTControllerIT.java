@@ -1,6 +1,6 @@
 package com.alten.web.rest;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.domain.User;
 import com.alten.repository.UserRepository;
 import com.alten.security.jwt.TokenProvider;
@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.not;
 /**
  * Integration tests for the {@link UserJWTController} REST controller.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 public class UserJWTControllerIT {
 
     @Autowired

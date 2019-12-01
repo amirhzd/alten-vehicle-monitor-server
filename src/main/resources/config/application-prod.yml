@@ -15,9 +15,9 @@
 
 logging:
   level:
-    ROOT: INFO
-    com.alten: INFO
-    io.github.jhipster: INFO
+    ROOT: DEBUG
+    com.alten: DEBUG
+    io.github.jhipster: DEBUG
 
 management:
   metrics:
@@ -34,15 +34,15 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/altenvehiclemonitorserver
-    username: altenvehiclemonitorserver
-    password:
+    username: user
+    password: 704351293
     hikari:
       poolName: Hikari
       auto-commit: false
   jpa:
     database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
     database: POSTGRESQL
-    show-sql: false
+    show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
       hibernate.connection.provider_disables_autocommit: true
@@ -51,7 +51,7 @@ spring:
       hibernate.generate_statistics: false
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
-    contexts: prod
+    contexts: prod, faker
   mail:
     host: localhost
     port: 25
@@ -93,6 +93,14 @@ server:
 # ===================================================================
 
 jhipster:
+  # CORS must be only enabled with the "dev" profile and this is for the sake of easier testing
+  cors:
+    allowed-origins: '*'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    exposed-headers: 'Authorization,Link,X-Total-Count'
+    allow-credentials: true
+    max-age: 1800
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461
@@ -131,4 +139,9 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  mqttBorkerConfig:
+    url: tcp://localhost:1883
+    username: user
+    password: 704351293
+    vehicleStatusTopic: vehicle-status-topic

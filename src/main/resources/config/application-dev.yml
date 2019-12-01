@@ -118,4 +118,9 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  mqttBorkerConfig:
+    url: tcp://localhost:1883
+    username: user
+    password: 704351293
+    vehicleStatusTopic: vehicle-status-topic

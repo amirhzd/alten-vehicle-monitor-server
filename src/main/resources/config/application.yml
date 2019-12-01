@@ -98,7 +98,9 @@ spring:
         size: 2
   thymeleaf:
     mode: HTML
-
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
 server:
   servlet:
     session:
@@ -131,8 +133,8 @@ jhipster:
     from: altenvehiclemonitorserver@localhost
   swagger:
     default-include-pattern: /api/.*
-    title: altenvehiclemonitorserver API
-    description: altenvehiclemonitorserver API documentation
+    title: alten-vehicle-monitor-server API
+    description: alten-vehicle-monitor-server API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:
@@ -149,4 +151,6 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  status-faker-read-pipe-delay: 200
+  status-faker-write-pipe-delay: 300

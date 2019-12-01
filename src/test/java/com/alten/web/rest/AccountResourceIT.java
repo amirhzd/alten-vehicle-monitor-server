@@ -1,6 +1,6 @@
 package com.alten.web.rest;
 
-import com.alten.AltenvehiclemonitorserverApp;
+import com.alten.AltenVehicleMonitorServerApp;
 import com.alten.config.Constants;
 import com.alten.domain.Authority;
 import com.alten.domain.User;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link AccountResource} REST controller.
  */
-@SpringBootTest(classes = AltenvehiclemonitorserverApp.class)
+@SpringBootTest(classes = AltenVehicleMonitorServerApp.class)
 public class AccountResourceIT {
 
     @Autowired

@@ -1,0 +1,25 @@
+entity Customer {
+    fullName String required
+    address String
+}
+
+entity CustomerVehicle {
+    vehicleId String required
+    registrationPlate String required
+}
+
+enum VehicleStatus {
+    CONNECTED,
+    NOT_CONNECTED
+}
+
+entity CustomerVehicleStatus {
+    timestamp LocalDate
+    status VehicleStatus required
+}
+
+relationship ManyToOne {
+    CustomerVehicle to Customer,
+    CustomerVehicleStatus to CustomerVehicle
+}
+

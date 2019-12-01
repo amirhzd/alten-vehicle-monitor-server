@@ -1,0 +1,43 @@
+{
+    "name": "CustomerVehicle",
+    "fields": [
+        {
+            "fieldName": "vehicleId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "registrationPlate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "customerVehicle",
+            "relationshipName": "customer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "customerVehicleStatus",
+            "otherEntityRelationshipName": "customerVehicle",
+            "relationshipName": "customerVehicleStatus"
+        }
+    ],
+    "changelogDate": "20191127001825",
+    "entityTableName": "customer_vehicle",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
