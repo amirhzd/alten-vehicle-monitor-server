@@ -1,6 +1,7 @@
 package com.alten.service;
 
 import com.alten.domain.CustomerVehicleStatus;
+import com.alten.domain.CustomerVehicleStatusView;
 import com.alten.repository.CustomerVehicleStatusRepository;
 import com.alten.service.dto.CustomerVehicleStatusFilter;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -29,7 +30,7 @@ public class VehicleStatusWebsocketManager {
     public void updateSubscribers() {
         websocketSubscribersMap.getSubscriptions().entrySet().stream()
             .forEach(entry -> {
-                List<CustomerVehicleStatus> statuses = customerVehicleStatusRepository.findAllByCustomerIdAndStatus(entry.getValue().getCustomerId()
+                List<CustomerVehicleStatusView> statuses = customerVehicleStatusRepository.findAllByCustomerIdAndStatus(entry.getValue().getCustomerId()
                     , entry.getValue().getStatus());
                 try {
                     SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor

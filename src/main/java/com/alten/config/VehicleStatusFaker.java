@@ -2,7 +2,6 @@ package com.alten.config;
 
 
 import com.alten.domain.CustomerVehicle;
-import com.alten.domain.enumeration.VehicleStatus;
 import com.alten.repository.CustomerVehicleRepository;
 import com.alten.service.dto.VehicleStatusDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,8 +32,10 @@ public class VehicleStatusFaker {
     private final CustomerVehicleRepository customerVehicleRepository;
     private final ApplicationProperties applicationProperties;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final boolean sendStatusForAll;
 
     public VehicleStatusFaker(CustomerVehicleRepository customerVehicleRepository, ApplicationProperties applicationProperties) {
+        this.sendStatusForAll = applicationProperties.isStatusFakerSendStatusForAll();
         this.customerVehicleRepository = customerVehicleRepository;
         this.applicationProperties = applicationProperties;
         pipedInputStream = new PipedInputStream();
@@ -54,23 +55,24 @@ public class VehicleStatusFaker {
      */
     public void start() {
         List<CustomerVehicle> vehicleList = customerVehicleRepository.findAll();
+        Random rand = new Random();
         vehicleList.stream().forEach(customerVehicle -> {
-            Random rand = new Random();
-            boolean randBool = rand.nextBoolean();
-            VehicleStatus vehicleStatus  = randBool ? VehicleStatus.CONNECTED : VehicleStatus.NOT_CONNECTED;
-            VehicleStatusDTO vehicleStatusDTO = new VehicleStatusDTO(customerVehicle.getVehicleId(), vehicleStatus);
-            try {
-                String data = objectMapper.writer().writeValueAsString(vehicleStatusDTO);
+            boolean isConnectedRandom = rand.nextBoolean();
+            if (isConnectedRandom || sendStatusForAll) {
+                VehicleStatusDTO vehicleStatusDTO = new VehicleStatusDTO(customerVehicle.getVehicleId());
                 try {
-                    if (data != null) {
-                        pipedOutputStream.write(data.getBytes());
+                    String data = objectMapper.writer().writeValueAsString(vehicleStatusDTO);
+                    try {
+                        if (data != null) {
+                            pipedOutputStream.write(data.getBytes());
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                } catch (IOException e) {
+                    Thread.sleep(applicationProperties.getStatusFakerWritePipeDelay());
+                } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                Thread.sleep(applicationProperties.getStatusFakerWritePipeDelay());
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
             }
         });
 

@@ -2,6 +2,7 @@ package com.alten.service;
 
 import com.alten.domain.CustomerVehicle;
 import com.alten.domain.CustomerVehicleStatus;
+import com.alten.domain.enumeration.VehicleStatus;
 import com.alten.repository.CustomerVehicleRepository;
 import com.alten.repository.CustomerVehicleStatusRepository;
 import com.alten.service.dto.VehicleStatusDTO;
@@ -59,7 +60,7 @@ public class VehicleStatusMessageProcessor extends AbstractMessageHandler {
                 CustomerVehicle customerVehicle = vehicles.get(0);
                 CustomerVehicleStatus customerVehicleStatus = new CustomerVehicleStatus();
                 customerVehicleStatus.customerVehicle(customerVehicle);
-                customerVehicleStatus.setStatus(vehicleStatusDTO.getStatus());
+                customerVehicleStatus.setStatus(VehicleStatus.CONNECTED);
                 customerVehicleStatus.setTimestamp(LocalDateTime.now());
                 customerVehicleStatusRepository.save(customerVehicleStatus);
             }

@@ -1,6 +1,7 @@
 package com.alten.service;
 
 import com.alten.domain.CustomerVehicleStatus;
+import com.alten.domain.CustomerVehicleStatusView;
 import com.alten.repository.CustomerVehicleStatusRepository;
 import com.alten.service.dto.CustomerVehicleStatusFilter;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,6 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
 
@@ -34,7 +34,7 @@ public class VehicleStatusWebsocketManagerTest {
     @Mock
     SimpMessageSendingOperations messagingTemplate;
 
-    Long expectedCustomerVehicleStatusId = 1001L;
+    String expectedCustomerVehicleId = "VLUR4X20009093588";
 
     @BeforeEach
     public void init() {
@@ -44,11 +44,11 @@ public class VehicleStatusWebsocketManagerTest {
         subscriberMap.put("34hj65", filter);
         when(websocketSubscribersMap.getSubscriptions()).thenReturn(subscriberMap);
 
-        List<CustomerVehicleStatus> statusList = new ArrayList<>();
-        CustomerVehicleStatus customerVehicleStatus = new CustomerVehicleStatus();
-        customerVehicleStatus.setId(expectedCustomerVehicleStatusId);
+        List<CustomerVehicleStatusView> statusList = new ArrayList<>();
+        CustomerVehicleStatusView customerVehicleStatus = new CustomerVehicleStatusView();
+        customerVehicleStatus.setVehicleId(expectedCustomerVehicleId);
         statusList.add(customerVehicleStatus);
-        when(customerVehicleStatusRepository.findAllByCustomerIdAndStatus(argThat(cId -> cId == 1L), any()))
+        when(customerVehicleStatusRepository.findAllByCustomerIdAndStatus(eq(1L), any()))
             .thenReturn(statusList);
 
         vehicleStatusWebsocketManager = new VehicleStatusWebsocketManager(websocketSubscribersMap
@@ -58,13 +58,13 @@ public class VehicleStatusWebsocketManagerTest {
     @Test
     public void testUpdateSubscribers() {
         vehicleStatusWebsocketManager.updateSubscribers();
-        ArgumentCaptor<List<CustomerVehicleStatus>> statusListArgumentCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<List<CustomerVehicleStatusView>> statusListArgumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(messagingTemplate, times(1)).convertAndSendToUser(
             eq("34hj65")
             , anyString()
             , statusListArgumentCaptor.capture()
             , anyMap());
-        assertEquals(expectedCustomerVehicleStatusId, statusListArgumentCaptor.getValue().get(0).getId());
+        assertEquals(expectedCustomerVehicleId, statusListArgumentCaptor.getValue().get(0).getVehicleId());
     }
 
 }

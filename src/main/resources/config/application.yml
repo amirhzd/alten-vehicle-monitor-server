@@ -154,3 +154,4 @@ jhipster:
 application:
   status-faker-read-pipe-delay: 200
   status-faker-write-pipe-delay: 300
+  status-faker-send-status-for-all: false

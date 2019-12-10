@@ -10,6 +10,46 @@ import java.time.LocalDateTime;
 /**
  * A CustomerVehicleStatus.
  */
+
+
+@NamedNativeQuery(query = "select * from (" +
+    "select 'NOT_CONNECTED' as status, null as timestamp, cv.vehicle_Id, cv.registration_Plate, c.full_Name, c.id as customer_Id " +
+    "from customer_vehicle cv  " +
+    "   join customer c on c.id = cv.customer_id " +
+    "   where cv.id not in (select distinct cvsi.customer_vehicle_id from Customer_Vehicle_Status cvsi) " +
+    "union all " +
+    "select 'NOT_CONNECTED' as status, null as timestamp, cv.vehicle_Id, cv.registration_Plate, c.full_Name, c.id as customer_Id " +
+    "from Customer_Vehicle_Status cvs " +
+    "   join customer_vehicle cv on cv.id = cvs.customer_Vehicle_id  " +
+    "   join customer c on c.id = cv.customer_id where cvs.timestamp < NOW() - INTERVAL 1 MINUTE " +
+    "   and cvs.id in (select max(cvsi.id) from Customer_Vehicle_Status cvsi group by cvsi.customer_vehicle_id)" +
+    "union all " +
+    "select 'CONNECTED' as status, cvs.timestamp, cv.vehicle_Id, cv.registration_Plate, c.full_Name, c.id as customer_Id " +
+    "from Customer_Vehicle_Status cvs " +
+    "   join customer_vehicle cv on cv.id = cvs.customer_Vehicle_id  " +
+    "   join customer c on c.id = cv.customer_id where cvs.timestamp >= NOW() - INTERVAL 1 MINUTE " +
+    "   and cvs.id in (select max(cvsi.id) from Customer_Vehicle_Status cvsi group by cvsi.customer_vehicle_id)" +
+    ") cvs0 where (:customerId is null or cvs0.customer_Id = :customerId) and (:status is null or cvs0.status = :status) "
+    , name="VehicleStatusByCustomerIdAndStatus"
+    , resultSetMapping = "VehicleStatusByCustomerIdAndStatus")
+
+
+@SqlResultSetMapping(
+    name="VehicleStatusByCustomerIdAndStatus",
+    classes={
+        @ConstructorResult(
+            targetClass= com.alten.domain.CustomerVehicleStatusView.class ,
+            columns={
+                @ColumnResult(name="status", type = String.class),
+                @ColumnResult(name="timestamp", type = LocalDateTime.class),
+                @ColumnResult(name="vehicle_Id", type = String.class),
+                @ColumnResult(name="registration_Plate", type = String.class),
+                @ColumnResult(name="full_Name", type = String.class),
+                @ColumnResult(name="customer_Id", type = Long.class)
+            }
+        )
+    }
+)
 @Entity
 @Table(name = "customer_vehicle_status")
 public class CustomerVehicleStatus implements Serializable {

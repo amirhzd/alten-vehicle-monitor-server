@@ -18,7 +18,12 @@ logging:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
     com.alten: DEBUG
-
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
 spring:
   profiles:
     active: dev
@@ -51,6 +56,8 @@ spring:
     database: H2
     show-sql: true
     properties:
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: CET
       hibernate.id.new_generator_mappings: true
       hibernate.connection.provider_disables_autocommit: true
       hibernate.cache.use_second_level_cache: false

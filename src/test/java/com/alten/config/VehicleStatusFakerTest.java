@@ -46,6 +46,7 @@ public class VehicleStatusFakerTest {
         applicationProperties = new ApplicationProperties();
         applicationProperties.setStatusFakerReadPipeDelay(200);
         applicationProperties.setStatusFakerWritePipeDelay(300);
+        applicationProperties.setStatusFakerSendStatusForAll(true);
     }
 
     @BeforeEach

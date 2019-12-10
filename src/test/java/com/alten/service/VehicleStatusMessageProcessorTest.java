@@ -29,7 +29,7 @@ public class VehicleStatusMessageProcessorTest {
     @Mock
     CustomerVehicleRepository customerVehicleRepository;
 
-    String msg = "{\"vehicleId\":\"VLUR4X20009093588\",\"status\":\"NOT_CONNECTED\"}";
+    String msg = "{\"vehicleId\":\"VLUR4X20009093588\"}";
     String vehicleId = "VLUR4X20009093588";
 
     @BeforeEach
@@ -58,7 +58,7 @@ public class VehicleStatusMessageProcessorTest {
         ArgumentCaptor<CustomerVehicleStatus> customerVehicleStatusArgCaptor = ArgumentCaptor.forClass(CustomerVehicleStatus.class);
         verify(customerVehicleStatusRepository,times(1)).save(customerVehicleStatusArgCaptor.capture());
         assertEquals(vehicleId, customerVehicleStatusArgCaptor.getValue().getCustomerVehicle().getVehicleId());
-        assertEquals(VehicleStatus.NOT_CONNECTED, customerVehicleStatusArgCaptor.getValue().getStatus());
+        assertEquals(VehicleStatus.CONNECTED, customerVehicleStatusArgCaptor.getValue().getStatus());
     }
 
 }

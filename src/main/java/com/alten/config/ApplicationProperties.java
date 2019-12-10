@@ -13,6 +13,7 @@ public class ApplicationProperties {
 
     private int statusFakerReadPipeDelay;
     private int statusFakerWritePipeDelay;
+    private boolean statusFakerSendStatusForAll;
     private MqttBorkerConfig mqttBorkerConfig;
 
     public int getStatusFakerReadPipeDelay() {
@@ -29,6 +30,14 @@ public class ApplicationProperties {
 
     public void setStatusFakerWritePipeDelay(int statusFakerWritePipeDelay) {
         this.statusFakerWritePipeDelay = statusFakerWritePipeDelay;
+    }
+
+    public boolean isStatusFakerSendStatusForAll() {
+        return statusFakerSendStatusForAll;
+    }
+
+    public void setStatusFakerSendStatusForAll(boolean statusFakerSendStatusForAll) {
+        this.statusFakerSendStatusForAll = statusFakerSendStatusForAll;
     }
 
     public MqttBorkerConfig getMqttBorkerConfig() {

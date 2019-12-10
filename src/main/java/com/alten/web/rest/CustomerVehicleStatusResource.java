@@ -1,6 +1,7 @@
 package com.alten.web.rest;
 
 import com.alten.domain.CustomerVehicleStatus;
+import com.alten.domain.CustomerVehicleStatusView;
 import com.alten.domain.enumeration.VehicleStatus;
 import com.alten.repository.CustomerVehicleStatusRepository;
 import com.alten.service.dto.CustomerVehicleStatusFilter;
@@ -90,7 +91,7 @@ public class CustomerVehicleStatusResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of customerVehicleStatuses in body.
      */
     @GetMapping("/customer-vehicle-statuses")
-    public List<CustomerVehicleStatus> getAllCustomerVehicleStatusesByFilter(@RequestParam(name = "status", required = false) VehicleStatus vehicleStatus,
+    public List<CustomerVehicleStatusView> getAllCustomerVehicleStatusesByFilter(@RequestParam(name = "status", required = false) VehicleStatus vehicleStatus,
                                                                                    @RequestParam(name = "customerId", required = false) Long customerId) {
         log.debug("REST request to get all CustomerVehicleStatuses");
         return customerVehicleStatusRepository.findAllByCustomerIdAndStatus(customerId, vehicleStatus);
@@ -127,4 +128,5 @@ public class CustomerVehicleStatusResource {
         customerVehicleStatusRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+
 }
