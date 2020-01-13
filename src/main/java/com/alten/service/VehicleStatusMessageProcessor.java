@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Exclusive message parser from the messages received from MQTT queue to VehicleStatusDTO instances that are saved
@@ -46,9 +47,9 @@ public class VehicleStatusMessageProcessor extends AbstractMessageHandler {
     private String getMessage(Message<?> message) {
         Object topicMessage = this.expression.getValue(this.evaluationContext, message);
         if (topicMessage instanceof Throwable) {
-            log.error("getting message from mqtt message failed", topicMessage);
+            log.error("getting message from mqtt message failed", (Throwable) topicMessage);
         }
-        return (String) topicMessage;
+        return Objects.toString(topicMessage);
     }
 
     @Override
